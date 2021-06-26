@@ -66,7 +66,7 @@ function mapMinWidthsToPadding(minWidths, screens, paddings) {
   return mapping;
 }
 
-const pullOutOfContainer = plugin(function ({ addUtilities, theme }) {
+const breakOutOfContainer = plugin(function ({ addUtilities, theme }) {
   const screens = theme('container.screens', theme('screens'));
   const minWidths = extractMinWidths(screens);
   const paddings = mapMinWidthsToPadding(minWidths, screens, theme('container.padding'));
@@ -128,4 +128,4 @@ const pullOutOfContainer = plugin(function ({ addUtilities, theme }) {
   ]);
 });
 
-module.exports = pullOutOfContainer;
+module.exports = breakOutOfContainer;
