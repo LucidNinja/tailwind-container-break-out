@@ -1,8 +1,10 @@
 # Tailwind Container Break Out
 
-This is a TailwindCSS plugin that is used to 'break' out of the Tailwind `.container` class. It works seamlessly with your container padding customisations within `tailwind.config.js`.
+This is a TailwindCSS plugin that is used to 'break' out of the Tailwind `.container` class. It works seamlessly with any container padding customisations or custom breakpoints that are set within your `tailwind.config.js`.
 
-> Note: for best results, set your `.container` to center mode, or use `mx-auto` on your containers.
+For best results, set your `.container` to center mode in your `tailwind.config.js`, or use `mx-auto` whenever you use the `.container` class. 
+
+The `pull-{left|right}` classes can be used anywhere inside of a container. However, these are simple utilities that only calculate the negative margins needed for an element to 'break out' at each responsive break point - they do not account for any extra padding or margins that have been added to your markup.
 
 ## Example
 
