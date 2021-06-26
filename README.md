@@ -32,7 +32,7 @@ module.exports = {
 <div class="container">
   <h1>This content is in a container</h1>
   <div class="pull-left pull-right">
-    <img src="example.jpg" width="100" height="100" />
+    <img src="example.jpg" class="w-full />
     <p>This whole div will expand beyond the container on both the left and right.</p>
   </div>
 </div>
@@ -49,7 +49,7 @@ module.exports = {
   </div>
   <div>
     <div class="pull-left pull-right">
-      <img src="example.jpg" width="100" height="100" />
+      <img src="example.jpg" class="w-full" />
       <p>This div will expand beyond the container on both the right hand side.</p>
     </div>
   </div>
