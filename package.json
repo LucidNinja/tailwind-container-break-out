@@ -1,6 +1,6 @@
 {
   "name": "tailwind-container-break-out",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A TailwindCSS plugin for breaking out of containers.",
   "main": "src/tailwind-container-break-out.js",
   "scripts": {
