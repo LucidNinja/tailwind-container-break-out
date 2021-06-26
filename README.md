@@ -59,9 +59,4 @@ module.exports = {
 
 ## Working example with NextJS
 
-<iframe src="https://codesandbox.io/embed/patient-firefly-2ldnj?fontsize=14&hidenavigation=1&theme=dark"
-     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
-     title="patient-firefly-2ldnj"
-     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-   ></iframe>
+See working example on Codesandbox [here](https://codesandbox.io/s/patient-firefly-2ldnj?file=/pages/index.js).
