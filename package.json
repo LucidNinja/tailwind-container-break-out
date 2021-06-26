@@ -1,0 +1,28 @@
+{
+  "name": "tailwind-container-break-out",
+  "version": "1.0.0",
+  "description": "A TailwindCSS plugin for breaking out of containers.",
+  "main": "src/tailwind-container-break-out.js",
+  "scripts": {
+    "test": "echo \"No test specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LucidNinja/tailwind-container-break-out.git"
+  },
+  "keywords": [
+    "tailwindcss",
+    "container",
+    "margins",
+    "pull"
+  ],
+  "author": "Wake Up, Dreamer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LucidNinja/tailwind-container-break-out/issues"
+  },
+  "homepage": "https://github.com/LucidNinja/tailwind-container-break-out#readme",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
