@@ -80,4 +80,4 @@ module.exports = {
 
 ## Working example with NextJS
 
-See working example on Codesandbox [here](https://codesandbox.io/s/patient-firefly-2ldnj?file=/pages/index.js).
+See working example on Codesandbox [here](https://codesandbox.io/s/sharp-andras-60kl4?file=/pages/index.js:1808-1812).
