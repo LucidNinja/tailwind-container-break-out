@@ -52,11 +52,9 @@ module.exports = {
   <div>
     <h1>This content is in a container, and sits on the left side of the grid.</h1>
   </div>
-  <div>
-    <div class="mr-break-out">
-      <img src="example.jpg" class="w-full" />
-      <p>This div will expand beyond the container on the right hand side.</p>
-    </div>
+  <div class="mr-break-out">
+    <img src="example.jpg" class="w-full" />
+    <p>This div will expand beyond the container on the right hand side.</p>
   </div>
 </div>
 ```
@@ -69,11 +67,9 @@ module.exports = {
     <h1>This content is in a container, and sits on the left side of the grid.</h1>
     <p>The background color will break out of the `.container` but this text will align to the `.container` edge.
   </div>
-  <div>
-    <div class="mr-break-out">
-      <img src="example.jpg" class="w-full" />
-      <p>This div will expand beyond the container on the right hand side.</p>
-    </div>
+  <div class="mr-break-out>
+    <img src="example.jpg" class="w-full" />
+    <p>This div will expand beyond the container on the right hand side.</p>
   </div>
 </div>
 ```
