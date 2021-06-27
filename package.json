@@ -3,6 +3,9 @@
   "version": "1.0.6",
   "description": "A TailwindCSS plugin for breaking out of containers.",
   "main": "src/tailwind-container-break-out.js",
+  "files": [
+    "src/**/*"
+  ],
   "scripts": {
     "test": "echo \"No test specified\""
   },
