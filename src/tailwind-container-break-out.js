@@ -66,7 +66,7 @@ function mapMinWidthsToPadding(minWidths, screens, paddings) {
   return mapping;
 }
 
-const breakOutOfContainer = plugin(function ({ addUtilities, theme }) {
+module.exports = plugin(function ({ addUtilities, theme }) {
   const screens = theme('container.screens', theme('screens'));
   const minWidths = extractMinWidths(screens);
   const paddings = mapMinWidthsToPadding(minWidths, screens, theme('container.padding'));
@@ -84,19 +84,85 @@ const breakOutOfContainer = plugin(function ({ addUtilities, theme }) {
       if (!paddingConfig) {
         return {};
       }
+      if (xAxis === 'x') {
+        return {
+          marginLeft: `-${paddingConfig.padding}`,
+          marginRight: `-${paddingConfig.padding}`
+        };
+      }
       return {
         [`margin${xAxis}`]: `-${paddingConfig.padding}`
       };
     }
 
     if (!paddingConfig) {
+      if (xAxis === 'x') {
+        return {
+          marginLeft: `calc(-100vw / 2 + ${minWidth} / 2 )`,
+          marginRight: `calc(-100vw / 2 + ${minWidth} / 2 )`
+        };
+      }
       return {
         [`margin${xAxis}`]: `calc(-100vw / 2 + ${minWidth} / 2 )`
       };
     }
 
+    if (xAxis === 'x') {
+      return {
+        marginLeft: `calc(-100vw / 2 + ${minWidth} / 2 - ${paddingConfig.padding} )`,
+        marginRight: `calc(-100vw / 2 + ${minWidth} / 2 - ${paddingConfig.padding} )`
+      };
+    }
+
     return {
       [`margin${xAxis}`]: `calc(-100vw / 2 + ${minWidth} / 2 - ${paddingConfig.padding} )`
+    };
+  };
+
+  const generatePaddingFor = (minWidth, xAxis) => {
+    let paddingConfig;
+    if (paddings.length === 1) {
+      paddingConfig = paddings[0];
+    } else {
+      paddingConfig = _.find(paddings, padding => `${padding.minWidth}` === `${minWidth}`);
+    }
+
+    if (minWidth === 0) {
+      if (!paddingConfig) {
+        return {};
+      }
+      if (xAxis === 'x') {
+        return {
+          paddingLeft: `${paddingConfig.padding}`,
+          paddingRight: `${paddingConfig.padding}`
+        };
+      }
+      return {
+        [`padding${xAxis}`]: `${paddingConfig.padding}`
+      };
+    }
+
+    if (!paddingConfig) {
+      if (xAxis === 'x') {
+        return {
+          paddingLeft: `calc(100vw / 2 - ${minWidth} / 2 )`,
+          paddingRight: `calc(100vw / 2 - ${minWidth} / 2 )`
+        };
+      }
+      return {
+        [`padding${xAxis}`]: `calc(100vw / 2 - ${minWidth} / 2 )`
+      };
+    }
+
+    if (xAxis === 'x') {
+      return {
+        paddingLeft: `calc(100vw / 2 - ${minWidth} / 2 + ${paddingConfig.padding} )`,
+        paddingRight: `calc(100vw / 2 - ${minWidth} / 2 + ${paddingConfig.padding} )`
+      };
+    }
+
+    return {
+      [`padding${xAxis}`]: `calc(100vw / 2 - ${minWidth} / 2 + ${paddingConfig.padding} )`
     };
   };
 
@@ -106,11 +172,23 @@ const breakOutOfContainer = plugin(function ({ addUtilities, theme }) {
     .map(minWidth => {
       return {
         [`@media (min-width: ${minWidth})`]: {
-          '.pull-left': {
+          '.ml-break-out': {
             ...generateMarginFor(minWidth, 'Left')
           },
-          '.pull-right': {
+          '.mr-break-out': {
             ...generateMarginFor(minWidth, 'Right')
+          },
+          '.mx-break-out': {
+            ...generateMarginFor(minWidth, 'x')
+          },
+          '.pl-break-out': {
+            ...generatePaddingFor(minWidth, 'Left')
+          },
+          '.pr-break-out': {
+            ...generatePaddingFor(minWidth, 'Right')
+          },
+          '.px-break-out': {
+            ...generatePaddingFor(minWidth, 'x')
           }
         }
       };
@@ -119,13 +197,23 @@ const breakOutOfContainer = plugin(function ({ addUtilities, theme }) {
 
   addUtilities([
     {
-      '.pull-left': Object.assign(generateMarginFor(0, 'Left'))
+      '.ml-break-out': Object.assign(generateMarginFor(0, 'Left'))
     },
     {
-      '.pull-right': Object.assign(generateMarginFor(0, 'Right'))
+      '.mr-break-out': Object.assign(generateMarginFor(0, 'Right'))
+    },
+    {
+      '.mx-break-out': Object.assign(generateMarginFor(0, 'x'))
+    },
+    {
+      '.pl-break-out': Object.assign(generatePaddingFor(0, 'Left'))
+    },
+    {
+      '.pr-break-out': Object.assign(generatePaddingFor(0, 'Right'))
+    },
+    {
+      '.px-break-out': Object.assign(generatePaddingFor(0, 'x'))
     },
     ...atRules
   ]);
 });
-
-module.exports = breakOutOfContainer;
