@@ -1,7 +1,13 @@
-import '../styles/globals.css'
+import { useEffect } from 'react';
+import setScrollbarWidth from 'set-scrollbar-width';
+import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  useEffect(() => {
+    setScrollbarWidth();
+  }, []);
+
+  return <Component {...pageProps} />;
 }
 
-export default MyApp
+export default MyApp;

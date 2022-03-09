@@ -2,38 +2,36 @@ const plugin = require('tailwindcss/plugin');
 
 function normalizeScreens(screens, root = true) {
   if (Array.isArray(screens)) {
-    return screens.map((screen) => {
+    return screens.map(screen => {
       if (root && Array.isArray(screen)) {
-        throw new Error('The tuple syntax is not supported for `screens`.')
+        throw new Error('The tuple syntax is not supported for `screens`.');
       }
 
       if (typeof screen === 'string') {
-        return { name: screen.toString(), values: [{ min: screen, max: undefined }] }
+        return { name: screen.toString(), values: [{ min: screen, max: undefined }] };
       }
 
-      let [name, options] = screen
-      name = name.toString()
+      let [name, options] = screen;
+      name = name.toString();
 
       if (typeof options === 'string') {
-        return { name, values: [{ min: options, max: undefined }] }
+        return { name, values: [{ min: options, max: undefined }] };
       }
 
       if (Array.isArray(options)) {
-        return { name, values: options.map((option) => resolveValue(option)) }
+        return { name, values: options.map(option => resolveValue(option)) };
       }
 
-      return { name, values: [resolveValue(options)] }
-    })
+      return { name, values: [resolveValue(options)] };
+    });
   }
 
-  return normalizeScreens(Object.entries(screens ?? {}), false)
+  return normalizeScreens(Object.entries(screens ?? {}), false);
 }
 
 function resolveValue({ 'min-width': _minWidth, min = _minWidth, max, raw } = {}) {
-  return { min, max, raw }
+  return { min, max, raw };
 }
-
-
 
 function extractMinWidths(breakpoints = []) {
   return breakpoints
@@ -79,7 +77,7 @@ function mapMinWidthsToPadding(minWidths, screens, paddings) {
   return mapping;
 }
 
-module.exports = plugin(function ({ addComponents, theme }) {
+module.exports = plugin(function ({ addComponents, addBase, theme }) {
   const screens = normalizeScreens(theme('container.screens', theme('screens')));
   const minWidths = extractMinWidths(screens);
   const paddings = mapMinWidthsToPadding(minWidths, screens, theme('container.padding'));
@@ -120,18 +118,18 @@ module.exports = plugin(function ({ addComponents, theme }) {
     if (!paddingConfig) {
       if (xAxis === 'x') {
         return {
-          marginLeft: `calc(-100vw / 2 + ${minWidth} / 2 )`,
-          marginRight: `calc(-100vw / 2 + ${minWidth} / 2 )`
+          marginLeft: `calc((-100vw + var(--twcb-scrollbar-width)) / 2 + ${minWidth} / 2 )`,
+          marginRight: `calc((-100vw + var(--twcb-scrollbar-width)) / 2 + ${minWidth} / 2 )`
         };
       }
       if (xAxis === 'r') {
         return {
-          marginRight: `calc(-100vw / 2 + ${minWidth} / 2 )`
+          marginRight: `calc((-100vw + var(--twcb-scrollbar-width)) / 2 + ${minWidth} / 2 )`
         };
       }
       if (xAxis === 'l') {
         return {
-          marginLeft: `calc(-100vw / 2 + ${minWidth} / 2 )`
+          marginLeft: `calc((-100vw + var(--twcb-scrollbar-width)) / 2 + ${minWidth} / 2 )`
         };
       }
     }
@@ -139,18 +137,18 @@ module.exports = plugin(function ({ addComponents, theme }) {
     // If there is a padding config and there is a minWidth, do complex calc.
     if (xAxis === 'x') {
       return {
-        marginLeft: `calc(-100vw / 2 + ${minWidth} / 2 - ${paddingConfig.padding} )`,
-        marginRight: `calc(-100vw / 2 + ${minWidth} / 2 - ${paddingConfig.padding} )`
+        marginLeft: `calc((-100vw + var(--twcb-scrollbar-width)) / 2 + ${minWidth} / 2 - ${paddingConfig.padding} )`,
+        marginRight: `calc((-100vw + var(--twcb-scrollbar-width)) / 2 + ${minWidth} / 2 - ${paddingConfig.padding} )`
       };
     }
     if (xAxis === 'r') {
       return {
-        marginRight: `calc(-100vw / 2 + ${minWidth} / 2 - ${paddingConfig.padding} )`
+        marginRight: `calc((-100vw + var(--twcb-scrollbar-width)) / 2 + ${minWidth} / 2 - ${paddingConfig.padding} )`
       };
     }
     if (xAxis === 'l') {
       return {
-        marginLeft: `calc(-100vw / 2 + ${minWidth} / 2 - ${paddingConfig.padding} )`
+        marginLeft: `calc((-100vw + var(--twcb-scrollbar-width)) / 2 + ${minWidth} / 2 - ${paddingConfig.padding} )`
       };
     }
   };
@@ -188,65 +186,72 @@ module.exports = plugin(function ({ addComponents, theme }) {
     if (!paddingConfig) {
       if (xAxis === 'x') {
         return {
-          paddingLeft: `calc(100vw / 2 - ${minWidth} / 2 )`,
-          paddingRight: `calc(100vw / 2 - ${minWidth} / 2 )`
+          paddingLeft: `calc((100vw - var(--twcb-scrollbar-width)) / 2 - ${minWidth} / 2 )`,
+          paddingRight: `calc((100vw - var(--twcb-scrollbar-width)) / 2 - ${minWidth} / 2 )`
         };
       }
       if (xAxis === 'r') {
         return {
-          paddingRight: `calc(100vw / 2 - ${minWidth} / 2 )`
+          paddingRight: `calc((100vw - var(--twcb-scrollbar-width)) / 2 - ${minWidth} / 2 )`
         };
       }
       if (xAxis === 'l') {
         return {
-          paddingLeft: `calc(100vw / 2 - ${minWidth} / 2 )`
+          paddingLeft: `calc((100vw - var(--twcb-scrollbar-width)) / 2 - ${minWidth} / 2 )`
         };
       }
     }
 
     if (xAxis === 'x') {
       return {
-        paddingLeft: `calc(100vw / 2 - ${minWidth} / 2 + ${paddingConfig.padding} )`,
-        paddingRight: `calc(100vw / 2 - ${minWidth} / 2 + ${paddingConfig.padding} )`
+        paddingLeft: `calc((100vw - var(--twcb-scrollbar-width)) / 2 - ${minWidth} / 2 + ${paddingConfig.padding} )`,
+        paddingRight: `calc((100vw - var(--twcb-scrollbar-width)) / 2 - ${minWidth} / 2 + ${paddingConfig.padding} )`
       };
     }
     if (xAxis === 'r') {
       return {
-        paddingRight: `calc(100vw / 2 - ${minWidth} / 2 + ${paddingConfig.padding} )`
+        paddingRight: `calc((100vw - var(--twcb-scrollbar-width)) / 2 - ${minWidth} / 2 + ${paddingConfig.padding} )`
       };
     }
     if (xAxis === 'l') {
       return {
-        paddingLeft: `calc(100vw / 2 - ${minWidth} / 2 + ${paddingConfig.padding} )`
+        paddingLeft: `calc((100vw - var(--twcb-scrollbar-width)) / 2 - ${minWidth} / 2 + ${paddingConfig.padding} )`
       };
     }
   };
 
-  const atRules = Array.from(new Set(minWidths.slice().sort((a, z) => parseInt(a) - parseInt(z)))).map((minWidth, i) => {
-    return {
-      [`@media (min-width: ${minWidth})`]: {
-        '.mx-break-out': {
-          ...generateMarginFor(minWidth, 'x')
-        },
-        '.ml-break-out': {
-          ...generateMarginFor(minWidth, 'l')
-        },
-        '.mr-break-out': {
-          ...generateMarginFor(minWidth, 'r')
-        },
-        '.px-break-out': {
-          ...generatePaddingFor(minWidth, 'x')
-        },
-        '.pl-break-out': {
-          ...generatePaddingFor(minWidth, 'l')
-        },
-        '.pr-break-out': {
-          ...generatePaddingFor(minWidth, 'r')
-        },
-      }
-    };
-  });
+  const atRules = Array.from(new Set(minWidths.slice().sort((a, z) => parseInt(a) - parseInt(z)))).map(
+    (minWidth, i) => {
+      return {
+        [`@media (min-width: ${minWidth})`]: {
+          '.mx-break-out': {
+            ...generateMarginFor(minWidth, 'x')
+          },
+          '.ml-break-out': {
+            ...generateMarginFor(minWidth, 'l')
+          },
+          '.mr-break-out': {
+            ...generateMarginFor(minWidth, 'r')
+          },
+          '.px-break-out': {
+            ...generatePaddingFor(minWidth, 'x')
+          },
+          '.pl-break-out': {
+            ...generatePaddingFor(minWidth, 'l')
+          },
+          '.pr-break-out': {
+            ...generatePaddingFor(minWidth, 'r')
+          }
+        }
+      };
+    }
+  );
 
+  addBase({
+    ':root': {
+      '--twcb-scrollbar-width': '0px'
+    }
+  });
 
   addComponents([
     {
@@ -269,7 +274,4 @@ module.exports = plugin(function ({ addComponents, theme }) {
     },
     ...atRules
   ]);
-
 });
-
-
