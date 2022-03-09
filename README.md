@@ -12,6 +12,10 @@ These classes are simple utilities that calculate the negative margins (and inne
 
 `npm i tailwind-container-break-out`
 
+For best browser compatibility that combats varying scrollbar behaviour, also install [Set Scrollbar Width](https://github.com/LucidNinja/set-scrollbar-width) and run `setScrollbarWidth()` on app mount
+
+`npm i set-scrollbar-width`
+
 ## Quick Start
 
 ### Require the plugin in your tailwind.config.js
@@ -74,6 +78,7 @@ module.exports = {
 </div>
 ```
 
+
 ## Examples
 
 ![Tailwind Container Break Out Examples](./examples/examples.png?raw=true 'Tailwind Container Break Out Examples')
@@ -81,3 +86,8 @@ module.exports = {
 ## Working example with NextJS
 
 See working example on Codesandbox [here](https://codesandbox.io/s/sharp-andras-60kl4?file=/pages/index.js:1808-1812).
+
+---
+
+## ⚠️ A note on browser compatibility
+This package may produce unintented scrollbar behaviour in some browsers, and so it is encouraged to use alongside this package https://github.com/LucidNinja/set-scrollbar-width, in order to set the scrollbar width as the `--twcb-scrollbar-width` CSS variable. By default, this is set as 0px, but should be overriden using [this package](https://github.com/LucidNinja/set-scrollbar-width) or Javascript in the framework of your choosing.
