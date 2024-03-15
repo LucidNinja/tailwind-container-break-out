@@ -64,11 +64,19 @@ function mapMinWidthsToPadding(minWidths, screens, paddings) {
     });
   }
 
+  let lastNonNullPadding = null;
+
   for (let minWidth of minWidths) {
     for (let screen of screens) {
       for (let { min } of screen.values) {
         if (min === minWidth) {
-          mapping.push({ minWidth, padding: paddings[screen.name] });
+          const paddingForScreenName = paddings[screen.name];
+          if (paddingForScreenName !== undefined) {
+            mapping.push({ minWidth, padding: paddingForScreenName });
+            lastNonNullPadding = paddingForScreenName;
+          } else if (lastNonNullPadding !== null) {
+            mapping.push({ minWidth, padding: lastNonNullPadding });
+          }
         }
       }
     }
