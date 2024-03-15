@@ -85,7 +85,7 @@ module.exports = {
 
 ## Working example with NextJS
 
-See working example on Codesandbox [here](https://codesandbox.io/s/sharp-andras-60kl4?file=/pages/index.js:1808-1812).
+See working example [here](https://tailwind-container-break-9rhl2ygxx-wakeupdreamer.vercel.app/).
 
 ---
 
