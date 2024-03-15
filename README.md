@@ -85,7 +85,7 @@ module.exports = {
 
 ## Working example with NextJS
 
-See working example [here](https://tailwind-container-break-9rhl2ygxx-wakeupdreamer.vercel.app/).
+See working example [here](https://tailwind-container-break-out-beryl.vercel.app/).
 
 ---
 
