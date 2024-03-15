@@ -85,8 +85,8 @@ export default function Home() {
 
         <div className="rounded-xl bg-stripes bg-gradient-to-r from-blue-lightest to-blue-light bg-blue-light grid grid-cols-2 gap-4 text-white text-center font-medium text-xl pb-8">
           <div className="col-span-2 bg-blue rounded-tr-lg rounded-tl-lg text-2xl p-4">Container</div>
-          <div className="col-span-2 rounded-lg bg-blue/70 py-8 max-md:mx-break-out max-md:px-break-out">
-            mx-break-out, px-break-out
+          <div className="col-span-2 rounded-lg bg-blue/70 py-8 max-lg:mx-break-out max-lg:px-break-out">
+            max-lg:mx-break-out, max-lg:px-break-out
             <p className="text-justify text-sm mt-4">
               Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id
               nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Vivamus
